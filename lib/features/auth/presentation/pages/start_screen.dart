@@ -210,7 +210,7 @@ class StartScreen extends StatelessWidget {
                 children: [
                   PrimaryButton(
                     onPressed: () {
-                      Navigator.push(
+                      Navigator.pushReplacement(
                         context,
                         MaterialPageRoute(
                           builder: (context) => const RegisterScreen(),
@@ -221,7 +221,7 @@ class StartScreen extends StatelessWidget {
                   ),
                   SecondaryButton(
                     onPressed: () {
-                      Navigator.push(
+                      Navigator.pushReplacement(
                         context,
                         MaterialPageRoute(
                           builder: (context) => const LoginScreen(),

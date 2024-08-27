@@ -7,6 +7,7 @@ import 'package:nerd_test/features/auth/presentation/bloc/auth_event.dart';
 import 'package:nerd_test/features/auth/presentation/bloc/auth_state.dart';
 import 'package:nerd_test/features/auth/presentation/pages/register_screen.dart';
 import 'package:nerd_test/features/auth/presentation/widgets/custom_bottom_navbar.dart';
+import 'package:nerd_test/features/chat/presentation/pages/chat_screen.dart';
 import 'package:nerd_test/shared/widgets/custom_textfield.dart';
 import 'package:nerd_test/shared/widgets/gradient_text_button.dart';
 import 'package:nerd_test/shared/widgets/primary_button.dart';
@@ -56,7 +57,11 @@ class _LoginScreenState extends State<LoginScreen> {
                   ScaffoldMessenger.of(context).showSnackBar(
                     const SnackBar(content: Text('Login Successful')),
                   );
-                  // Navigate to next screen or home screen
+                  Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const ChatScreen(),
+                      ));
                 } else if (state is AuthError) {
                   ScaffoldMessenger.of(context).showSnackBar(
                     SnackBar(content: Text(state.message)),

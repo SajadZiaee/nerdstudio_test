@@ -38,7 +38,8 @@ class _ChatScreenState extends State<ChatScreen> {
                   onDeletePressed: () {},
                   onGooglePressed: () {},
                   onPinPressed: () {},
-                  onCopyPressed: () {})
+                  onCopyPressed: () {},
+                )
               : ChatAppbar(
                   title: 'Chat AI',
                   backButtonSvgPath: 'assets/images/chevron-left.svg',
@@ -47,35 +48,24 @@ class _ChatScreenState extends State<ChatScreen> {
                   onBackPressed: () {},
                   onHistoryPressed: () {},
                   onHighlightPressed: () {},
-                  // onToggleTranslateMode: () {
-                  //   BlocProvider.of<ChatBloc>(context).add(ToggleTranslationModeEvent());
-                  // },
                 ) as PreferredSizeWidget,
-          body: _buildBody(state),
+          body: Column(
+            children: [
+              Expanded(
+                child: Padding(
+                  padding: EdgeInsets.only(
+                    bottom: MediaQuery.of(context).viewInsets.bottom, // Add padding for keyboard
+                  ),
+                  child: _buildBody(state),
+                ),
+              ),
+            ],
+          ),
           floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
           floatingActionButton: _buildFloatingActionButton(state),
           bottomNavigationBar: Container(
             margin: const EdgeInsets.symmetric(vertical: 16),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Expanded(
-                  child: ChatBox(
-                    controller: _controller,
-                  ),
-                ),
-                GradientIconButton(
-                  svgPath: 'assets/images/send.svg',
-                  onPressed: () {
-                    final content = _controller.text.trim();
-                    if (content.isNotEmpty) {
-                      BlocProvider.of<ChatBloc>(context).add(SendMessageEvent(content));
-                      _controller.clear();
-                    }
-                  },
-                ),
-              ],
-            ),
+            child: ChatBox(controller: _controller),
           ),
         );
       },
@@ -84,7 +74,12 @@ class _ChatScreenState extends State<ChatScreen> {
 
   Widget _buildBody(ChatState state) {
     if (state is ChatInitial) {
-      return Column(children: [SvgPicture.asset('assets/images/Frame.svg'), const Center(child: Text('Ask AI a question!'))]);
+      return Column(
+        children: [
+          SvgPicture.asset('assets/images/Frame.svg'),
+          const Center(child: Text('Ask AI a question!')),
+        ],
+      );
     } else if (state is ChatLoading) {
       return Center(child: CircularProgressIndicator());
     } else if (state is ChatLoaded || state is TranslationModeToggled) {

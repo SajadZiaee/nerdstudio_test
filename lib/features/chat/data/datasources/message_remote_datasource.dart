@@ -17,13 +17,11 @@ class ChatRemoteDataSourceImpl implements ChatRemoteDataSource {
   @override
   Stream<MessageModel> chatWithAI(String content) async* {
     String? accessToken = ApplicationGlobal().accessToken;
-    accessToken =
-        'Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InRlc3QiLCJlbWFpbCI6InRlc3RAdGVzdC5jb20iLCJzdWIiOiJkNDY1MzJiOS00YjIyLTQ5ZDQtYWViYi01ZmIyNzAyOWE4MTYiLCJpYXQiOjE3MjQ3NDA0MDEsImV4cCI6MTcyNDc1ODQwMX0.DA96qioKTWaqaaU7j92gNhvCzIP76TJsGyOnXMdjO9PZbLZbiqGBw0c4wqlJ4HljXky29CY7Rl4Umz9KCuPZaw';
 
     try {
       final response = await dio.post(
         'http://5.78.55.161:8000/v1/api/ai_writers/generate_AI_writer/',
-        options: Options(headers: {'Authorization': accessToken}),
+        options: Options(headers: {'Authorization': 'Bearer $accessToken'}),
         data: {
           "document_name": "New Document",
           "frequency_penalty": 0,
@@ -69,13 +67,11 @@ class ChatRemoteDataSourceImpl implements ChatRemoteDataSource {
   @override
   Stream<MessageModel> translateMessage(String content) async* {
     String? accessToken = ApplicationGlobal().accessToken;
-    accessToken =
-        'Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InRlc3QiLCJlbWFpbCI6InRlc3RAdGVzdC5jb20iLCJzdWIiOiJkNDY1MzJiOS00YjIyLTQ5ZDQtYWViYi01ZmIyNzAyOWE4MTYiLCJpYXQiOjE3MjQ3NDA0MDEsImV4cCI6MTcyNDc1ODQwMX0.DA96qioKTWaqaaU7j92gNhvCzIP76TJsGyOnXMdjO9PZbLZbiqGBw0c4wqlJ4HljXky29CY7Rl4Umz9KCuPZaw';
 
     try {
       final response = await dio.post(
         'http://5.78.55.161:8000/v1/api/translates/generate_translate/',
-        options: Options(headers: {'Authorization': accessToken}),
+        options: Options(headers: {'Authorization': 'Bearer $accessToken'}),
         data: {
           "document_name": "New Document",
           "frequency_penalty": 0,
