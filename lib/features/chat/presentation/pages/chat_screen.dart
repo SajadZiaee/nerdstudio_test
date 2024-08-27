@@ -2,14 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:nerd_test/features/chat/presentation/bloc/chat_bloc.dart';
-import 'package:nerd_test/features/chat/presentation/bloc/chat_event.dart';
 import 'package:nerd_test/features/chat/presentation/bloc/chat_state.dart';
 import 'package:nerd_test/features/chat/presentation/widgets/chat_appbar.dart';
 import 'package:nerd_test/features/chat/presentation/widgets/chatbox.dart';
 import 'package:nerd_test/features/chat/presentation/widgets/hold_message_appbar.dart';
 import 'package:nerd_test/features/chat/presentation/widgets/message.dart';
 import 'package:nerd_test/features/chat/presentation/widgets/stop_responding_button.dart';
-import 'package:nerd_test/shared/widgets/gradient_icon_button.dart';
 
 class ChatScreen extends StatefulWidget {
   const ChatScreen({super.key});
@@ -27,6 +25,7 @@ class _ChatScreenState extends State<ChatScreen> {
     return BlocBuilder<ChatBloc, ChatState>(
       builder: (context, state) {
         return Scaffold(
+          resizeToAvoidBottomInset: true,
           appBar: _isEditing
               ? HoldMessageAppbar(
                   onClosePressed: () {
@@ -54,8 +53,8 @@ class _ChatScreenState extends State<ChatScreen> {
               Expanded(
                 child: Padding(
                   padding: EdgeInsets.only(
-                    bottom: MediaQuery.of(context).viewInsets.bottom, // Add padding for keyboard
-                  ),
+                      // bottom: MediaQuery.of(context).viewInsets.bottom, // Add padding for keyboard
+                      ),
                   child: _buildBody(state),
                 ),
               ),
@@ -63,7 +62,7 @@ class _ChatScreenState extends State<ChatScreen> {
           ),
           floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
           floatingActionButton: _buildFloatingActionButton(state),
-          bottomNavigationBar: Container(
+          bottomSheet: Container(
             margin: const EdgeInsets.symmetric(vertical: 16),
             child: ChatBox(controller: _controller),
           ),

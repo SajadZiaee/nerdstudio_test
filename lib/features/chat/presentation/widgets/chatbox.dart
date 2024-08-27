@@ -19,12 +19,6 @@ class ChatBox extends StatelessWidget {
             constraints: BoxConstraints(
               maxWidth: MediaQuery.of(context).size.width - 64,
             ),
-            padding: EdgeInsets.only(
-              bottom: MediaQuery.of(context).viewInsets.bottom, // Add padding to account for keyboard
-              left: 12,
-              right: 12,
-              top: 8,
-            ),
             decoration: BoxDecoration(
               color: const Color(0xFFF8F6FF),
               borderRadius: BorderRadius.circular(8),
@@ -53,23 +47,15 @@ class ChatBox extends StatelessWidget {
             ),
           ),
         ),
-        Container(
-          padding: EdgeInsets.only(
-            bottom: MediaQuery.of(context).viewInsets.bottom, // Add padding to account for keyboard
-            left: 12,
-            right: 12,
-            top: 8,
-          ),
-          child: GradientIconButton(
-            svgPath: 'assets/images/send.svg',
-            onPressed: () {
-              final content = controller.text.trim();
-              if (content.isNotEmpty) {
-                BlocProvider.of<ChatBloc>(context).add(SendMessageEvent(content));
-                controller.clear();
-              }
-            },
-          ),
+        GradientIconButton(
+          svgPath: 'assets/images/send.svg',
+          onPressed: () {
+            final content = controller.text.trim();
+            if (content.isNotEmpty) {
+              BlocProvider.of<ChatBloc>(context).add(SendMessageEvent(content));
+              controller.clear();
+            }
+          },
         ),
       ],
     );

@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:nerd_test/features/auth/data/models/user_model.dart';
+import 'package:nerd_test/shared/global/application_global.dart';
 
 abstract class AuthRemoteDataSource {
   Future<UserModel> login(String email, String password);
@@ -20,6 +21,8 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
 
     if (response.statusCode == 200) {
       response.data['workspace']['user']['access_token'] = response.data['access_token'];
+      ApplicationGlobal.setAccessToken(response.data['access_token']);
+
       return UserModel.fromJson(response.data['workspace']['user']);
     } else {
       throw DioException(requestOptions: response.requestOptions);
