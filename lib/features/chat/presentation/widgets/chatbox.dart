@@ -19,6 +19,7 @@ class ChatBox extends StatelessWidget {
             constraints: BoxConstraints(
               maxWidth: MediaQuery.of(context).size.width - 64,
             ),
+            padding: const EdgeInsets.all(8),
             decoration: BoxDecoration(
               color: const Color(0xFFF8F6FF),
               borderRadius: BorderRadius.circular(8),

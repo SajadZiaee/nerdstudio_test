@@ -235,16 +235,35 @@ class StartScreen extends StatelessWidget {
             ),
           ),
           Positioned(
-            top: screenHeight * 0.45,
+            top: screenHeight * 0.53,
             left: 0,
             right: 0,
-            child: const Center(
-              child: SizedBox(
+            child: Center(
+              child: Container(
                 width: 333,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.all(Radius.circular(10)), // Rounded corners
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.black.withOpacity(0.35), // Darker shadow color
+                      blurRadius: 10, // Blur effect of the shadow
+                      spreadRadius: 2, // Spread of the shadow
+                      offset: const Offset(1, 1), // Shadow position
+                    ),
+                  ],
+                ),
                 child: Text(
                   'Create anything you want with AI',
                   textAlign: TextAlign.center,
-                  style: TextStyles.heading1,
+                  style: TextStyles.heading1.copyWith(
+                    shadows: [
+                      const Shadow(
+                        color: Colors.black,
+                        offset: Offset(1, 1),
+                        blurRadius: 6,
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ),
