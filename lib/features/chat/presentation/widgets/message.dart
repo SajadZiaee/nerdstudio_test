@@ -7,6 +7,7 @@ class MessageWidget extends StatelessWidget {
   final String time;
   final bool isUserMessage;
   final VoidCallback? onLongPress;
+  final bool isStreaming;
 
   const MessageWidget({
     Key? key,
@@ -14,6 +15,7 @@ class MessageWidget extends StatelessWidget {
     required this.time,
     required this.isUserMessage,
     this.onLongPress,
+    this.isStreaming = false,
   }) : super(key: key);
 
   @override
@@ -52,6 +54,9 @@ class MessageWidget extends StatelessWidget {
                       message,
                       style: TextStyles.labelText,
                     ),
+                    if (isStreaming) ...[
+                      const SizedBox(height: 8),
+                    ],
                     Align(
                       alignment: isUserMessage ? Alignment.bottomRight : Alignment.bottomLeft,
                       child: Text(

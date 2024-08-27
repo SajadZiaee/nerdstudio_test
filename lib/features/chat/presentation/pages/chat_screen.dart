@@ -93,6 +93,7 @@ class _ChatScreenState extends State<ChatScreen> {
             time: '12:00 PM',
             isUserMessage: message.role == 'user',
             onLongPress: _onMessageLongPress,
+            isStreaming: index == messages.length - 1 && message.role == 'assistant',
           );
         },
       );
@@ -103,7 +104,7 @@ class _ChatScreenState extends State<ChatScreen> {
   }
 
   Widget _buildFloatingActionButton(ChatState state) {
-    if (state is ChatLoading) {
+    if (state is ChatLoaded) {
       return StopRespondingButton(
         onPressed: () {
           // Implement stop responding functionality
